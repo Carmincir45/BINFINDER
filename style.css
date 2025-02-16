@@ -315,8 +315,8 @@ body {
         box-shadow: var(--shadow-sm) !important;
         border: none !important;
         bottom: 20px;
-        left: 20px;
-        top: 730px;
+        left: 15px;
+        top: 710px;
     }
 }
 
