@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napoli Bin Finder</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-header">
+            <div class="nav-logo">
+                <i class="fas fa-recycle"></i>
+                <span>Servizi</span>
+            </div>
+            <button class="close-nav">&times;</button>
+        </div>
+        <ul class="nav-list">
+            <li><a href="#riciclo" class="nav-item"><i class="fas fa-id-card"></i> Pass Riciclo</a></li>
+            <li><a href="#news" class="nav-item"><i class="fas fa-newspaper"></i> News</a></li>
+            <li><a href="#segnalazione" class="nav-item"><i class="fas fa-exclamation-triangle"></i> Segnalazioni</a></li>
+            <li><a href="#assistenza" class="nav-item"><i class="fas fa-robot"></i> Assistenza</a></li>
+        </ul>
+    </nav>
+
+    <div class="nav-overlay"></div>
+
+    <div id="map-container">
+        <div class="app-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <span>Napoli Bin Finder</span>
+            </div>
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Cerca cestino...">
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Aggiungi qui gli altri componenti (modali, sidebar, ecc.) -->
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
