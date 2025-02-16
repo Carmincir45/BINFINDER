@@ -151,10 +151,11 @@ body {
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.nav-visible {
-    left: 0;
-    animation: fadeIn 0.3s ease-in-out;
+.main-nav.active {
+    left: 0; /* Porta il menu in vista */
 }
+
+
 
 .nav-overlay {
     position: fixed;
@@ -168,8 +169,12 @@ body {
     display: none;
 }
 
-.nav-overlay-visible {
+.nav-overlay.active {
     display: block;
+}
+
+.menu-toggle.hidden {
+    display: none;
 }
 
 .nav-header {
@@ -246,6 +251,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.menu-toggle.hidden {
+    display: none;
 }
 
 .menu-toggle:hover {
