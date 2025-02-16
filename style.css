@@ -311,6 +311,10 @@ body {
 
     .leaflet-control-zoom {
         margin: 10px !important;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm) !important;
+        border: none !important;
+        top: 600px;
     }
 }
 
