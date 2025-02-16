@@ -3,15 +3,12 @@ const navManager = (() => {
     const nav = document.querySelector('.main-nav');
     const overlay = document.querySelector('.nav-overlay');
     const toggle = document.querySelector('.menu-toggle');
+    const closeNavButton = document.querySelector('.close-nav');
 
     const init = () => {
-        toggle.addEventListener('click', () => {
-            nav.classList.add('nav-visible');
-            overlay.classList.add('nav-overlay-visible');
-        });
-
+        toggle.addEventListener('click', openMenu);
+        closeNavButton.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
-        document.querySelector('.close-nav').addEventListener('click', closeMenu);
 
         // Gestione servizi
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -24,9 +21,16 @@ const navManager = (() => {
         });
     };
 
+    const openMenu = () => {
+        nav.classList.add('active');
+        overlay.classList.add('active');
+        toggle.classList.add('hidden'); // Nascondi il bottone menu-toggle
+    };
+
     const closeMenu = () => {
-        nav.classList.remove('nav-visible');
-        overlay.classList.remove('nav-overlay-visible');
+        nav.classList.remove('active');
+        overlay.classList.remove('active');
+        toggle.classList.remove('hidden');
     };
 
     const openService = (service) => {
