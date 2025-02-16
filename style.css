@@ -314,7 +314,9 @@ body {
         overflow: hidden;
         box-shadow: var(--shadow-sm) !important;
         border: none !important;
-        top: 600px;
+        bottom: 20px;
+        left: 20px;
+        top: auto;
     }
 }
 
