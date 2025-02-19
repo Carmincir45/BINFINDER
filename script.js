@@ -72,7 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, err => {
             console.error('Errore geolocalizzazione:', err);
         });
-    } else {
+    } 
+       else {
         console.error('La mappa non è stata inizializzata.');
-    }
+       }
 });
