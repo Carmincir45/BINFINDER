@@ -75,5 +75,5 @@ document.addEventListener('DOMContentLoaded', () => {
     } 
        else {
         console.error('La mappa non è stata inizializzata.');
-       }
-});
+       
+);
