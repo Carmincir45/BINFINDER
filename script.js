@@ -59,7 +59,7 @@ const mapManager = (() => {
 })();
 
 // Inizializzazione generale
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () =>) {
     navManager.init();
     mapManager.init();
 
@@ -75,4 +75,4 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('La mappa non è stata inizializzata.');
        }
-)};
+};
