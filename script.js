@@ -64,14 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
     mapManager.init();
 
      const map = mapManager.getMap(); // Otteniamo la mappa
-        if (map) {
+       if (map) {
+        navigator.geolocation.getCurrentPosition(pos => {
             L.marker([pos.coords.latitude, pos.coords.longitude])
                 .addTo(map)
                 .bindPopup('La tua posizione');
-        } else {
-            console.error('La mappa non è stata inizializzata.');
-        }
-    }, err => {
-        console.error('Errore geolocalizzazione:', err);
-    });
+        }, err => {
+            console.error('Errore geolocalizzazione:', err);
+        });
+    } else {
+        console.error('La mappa non è stata inizializzata.');
+    }
 });
