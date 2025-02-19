@@ -53,7 +53,7 @@ const mapManager = (() => {
         init: () => {
             initMap();
             // Altri init mappa...
-        }
+        },
          getMap: () => map
     };
 })();
