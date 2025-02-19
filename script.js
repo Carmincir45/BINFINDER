@@ -54,6 +54,7 @@ const mapManager = (() => {
             initMap();
             // Altri init mappa...
         }
+         getMap: () => map
     };
 })();
 
@@ -62,11 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
     navManager.init();
     mapManager.init();
 
-    // Geolocalizzazione
-    navigator.geolocation.getCurrentPosition(pos => {
-        L.marker([pos.coords.latitude, pos.coords.longitude])
-            .addTo(mapManager.map)
-            .bindPopup('La tua posizione');
+     const map = mapManager.getMap(); // Otteniamo la mappa
+        if (map) {
+            L.marker([pos.coords.latitude, pos.coords.longitude])
+                .addTo(map)
+                .bindPopup('La tua posizione');
+        } else {
+            console.error('La mappa non è stata inizializzata.');
+        }
     }, err => {
         console.error('Errore geolocalizzazione:', err);
     });
