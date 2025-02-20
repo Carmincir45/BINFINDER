@@ -45,20 +45,16 @@ const navManager = (() => {
 
 // Gestione mappa
 const mapManager = (() => {
-    let map=null;
+    let mapInstance = null;  // Rinominiamo per chiarezza
+    
     const initMap = () => {
-        map = L.map('map').setView([40.8522, 14.2681], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        
+        mapInstance = L.map('map').setView([40.8522, 14.2681], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}/.png').addTo(mapInstance);
     };
 
-    return {
-        init: () => {
-            init: initMap,
-            map: map
-            // Altri init mappa...
-        }
-        
+    return { // <-- Questo è l'oggetto restituito
+        init: initMap,
+        map: () => mapInstance // Esponi tramite funzione
     };
 })();
 const chatManager = (() => {
