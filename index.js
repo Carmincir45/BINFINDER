@@ -7,6 +7,10 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
+app.use((req, res, next) => {
+  res.removeHeader("Permissions-Policy");
+  next();
+});
 app.use(express.static('public'));
 
 const API_KEY = 'INSERISCI_LA_TUA_CHIAVE';
