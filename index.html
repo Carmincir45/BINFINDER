@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- BotUI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css">
+    
+    <!-- BotUI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 </head>
 <body>
     <nav class="main-nav">
@@ -26,6 +33,9 @@
             <li><a href="#assistenza" class="nav-item"><i class="fas fa-robot"></i> Assistenza</a></li>
         </ul>
     </nav>
+    <div id="botui-app">
+        <bot-ui></bot-ui>
+    </div>
 
     <div class="nav-overlay"></div>
 
