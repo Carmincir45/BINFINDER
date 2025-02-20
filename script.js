@@ -1,4 +1,3 @@
-// Gestione menu
 const navManager = (() => {
     const nav = document.querySelector('.main-nav');
     const overlay = document.querySelector('.nav-overlay');
@@ -60,43 +59,107 @@ const mapManager = (() => {
         }
     };
 })();
-//Start chat with user
-const startChat = () => {
-    var botui = new BotUI('botui-app');
-
-    const getResponse = () => {
-        botui.message.add({
-            content: 'Ciao! Come posso aiutarti oggi?'
-        }).then(function () {
-            return botui.action.text({
-                action: {
-                    placeholder: 'Scrivi il tuo messaggio qui...'
-                }
-            });
-        }).then(function (res) {
-            // Logica per risposte predefinite
-            var risposta;
-            switch (res.value.toLowerCase()) {
-                case 'ciao':
-                    risposta = 'Ciao! Come posso aiutarti?';
-                    break;
-                case 'problema':
-                    risposta = 'Mi dispiace che tu stia riscontrando un problema. Potresti descriverlo in dettaglio?';
-                    break;
-                case 'grazie':
-                    risposta = 'Prego! Se hai altre domande, chiedi pure.';
-                    break;
-                default:
-                    risposta = 'Mi dispiace, non ho capito. Puoi ripetere?';
-            }
-
-            return botui.message.add({
-                content: risposta
-            });
-        }).then(getResponse);
+const chatManager = (() => {
+    let botuiInstance;
+    const FAQ = {
+        'orari': 'Gli orari di raccolta sono dalle 6:00 alle 22:00 tutti i giorni.',
+        'riciclo': 'Puoi conferire plastica, vetro, carta e umido nei rispettivi contenitori',
+        'segnalazione': 'Per segnalare un cestino pieno, invia la posizione tramite la mappa',
+        'pass': 'Il Pass Riciclo si richiede online su napoliricicla.it o presso gli uffici comunali'
     };
 
-    getResponse();
+    const initChat = () => {
+        botuiInstance = new BotUI('botui-app');
+        showWelcomeMessage();
+    };
+
+    const showWelcomeMessage = async () => {
+        await botuiInstance.message.add({
+            content: '👋 Ciao! Sono EcoBot, l\'assistente virtuale per la raccolta rifiuti.',
+            delay: 800
+        });
+
+        await showMainOptions();
+    };
+
+    const showMainOptions = async () => {
+        await botuiInstance.action.button({
+            action: [
+                { text: 'Orari raccolta', value: 'orari' },
+                { text: 'Dove conferire', value: 'riciclo' },
+                { text: 'Segnalazioni', value: 'segnalazione' },
+                { text: 'Pass Riciclo', value: 'pass' }
+            ]
+        }).then(handleMainChoice);
+    };
+
+    const handleMainChoice = async (res) => {
+        await botuiInstance.message.add({
+            content: FAQ[res.value],
+            delay: 600
+        });
+
+        await botuiInstance.action.button({
+            action: [
+                { text: 'Altra domanda', value: 'continue' },
+                { text: 'Chiudi chat', value: 'exit' }
+            ]
+        }).then(handleFollowUp);
+    };
+
+    const handleFollowUp = async (res) => {
+        if (res.value === 'continue') {
+            await showMainOptions();
+        } else {
+            await botuiInstance.message.add({
+                content: 'Arrivederci! 😊',
+                delay: 300
+            });
+            document.querySelector('.main-nav').classList.remove('chat-active');
+        }
+    };
+
+    const handleFreeText = async (text) => {
+        const match = Object.keys(FAQ).find(key => 
+            text.toLowerCase().includes(key)
+        );
+
+        if (match) {
+            await botuiInstance.message.add({
+                content: FAQ[match],
+                delay: 600
+            });
+        } else {
+            await botuiInstance.message.add({
+                content: 'Mi dispiace, posso aiutarti con:',
+                delay: 400
+            });
+            await showMainOptions();
+        }
+    };
+
+    return {
+        start: () => {
+            document.querySelector('.main-nav').classList.add('chat-active');
+            initChat();
+        },
+        handleFreeText
+    };
+})();
+
+//chat with user
+const startChat = () => {
+    chatManager.start();
+    
+    // Abilita input testuale alternativo
+    const inputField = document.querySelector('.botui-actions-text-input');
+    inputField.addEventListener('keypress', async (e) => {
+        if (e.key === 'Enter') {
+            const text = e.target.value;
+            await chatManager.handleFreeText(text);
+            e.target.value = '';
+        }
+    });
 };
 // Inizializzazione generale
 document.addEventListener('DOMContentLoaded', () => {
