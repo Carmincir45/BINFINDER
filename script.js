@@ -57,6 +57,7 @@ const mapManager = (() => {
             initMap();
             // Altri init mappa...
         }
+        map: () => map 
     };
 })();
 const chatManager = (() => {
@@ -169,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Geolocalizzazione
     navigator.geolocation.getCurrentPosition(pos => {
         L.marker([pos.coords.latitude, pos.coords.longitude])
-            .addTo(mapManager.map)
+            .addTo(mapManager.map())
             .bindPopup('La tua posizione');
     }, err => {
         console.error('Errore geolocalizzazione:', err);
