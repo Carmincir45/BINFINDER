@@ -45,7 +45,7 @@ const navManager = (() => {
 
 // Gestione mappa
 const mapManager = (() => {
-    let map;
+    let map=null;
     const initMap = () => {
         map = L.map('map').setView([40.8522, 14.2681], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -54,7 +54,8 @@ const mapManager = (() => {
 
     return {
         init: () => {
-            initMap();
+            init: initMap,
+            map: map
             // Altri init mappa...
         }
         
@@ -172,7 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
         L.marker([pos.coords.latitude, pos.coords.longitude])
             .addTo(mapManager.map)
             .bindPopup('La tua posizione');
+            .openPopup();
     }, err => {
         console.error('Errore geolocalizzazione:', err);
+         iziToast.warning({ 
+            title: 'Attenzione',
+            message: 'Abilita la geolocalizzazione per vedere la tua posizione' 
+        });
     });
 });
