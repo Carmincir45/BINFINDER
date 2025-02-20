@@ -156,6 +156,47 @@ body {
     left: 0; /* Porta il menu in vista */
 }
 
+/* CHAT CON IL BOT*/
+.main-nav.chat-active {
+    width: 350px;
+    background: linear-gradient(160deg, #2c3e50 0%, #3498db 150%);
+}
+
+#botui-app {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 220px;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.botui-message-content {
+    background: rgba(255, 255, 255, 0.1)!important;
+    border-radius: 15px!important;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2)!important;
+}
+
+.botui-actions-buttons-button {
+    background: rgba(255, 255, 255, 0.15)!important;
+    border: none!important;
+    margin: 5px!important;
+    transition: all 0.3s ease!important;
+}
+
+.botui-actions-buttons-button:hover {
+    background: var(--primary-color)!important;
+    transform: translateY(-2px);
+}
+
+.botui-actions-text-input {
+    background: rgba(255, 255, 255, 0.9)!important;
+    border-radius: 20px!important;
+    padding: 12px 20px!important;
+}
+
 
 
 .nav-overlay {
