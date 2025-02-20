@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navigator.geolocation.getCurrentPosition(pos => {
         L.marker([pos.coords.latitude, pos.coords.longitude])
             .addTo(mapManager.getmap())
-            .bindPopup('La tua posizione');
+            .bindPopup('La tua posizione')
             .openPopup();
     }, err => {
         console.error('Errore geolocalizzazione:', err);
