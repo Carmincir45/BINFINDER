@@ -60,41 +60,44 @@ const mapManager = (() => {
         }
     };
 })();
-//STart chat with user
+//Start chat with user
 const startChat = () => {
     var botui = new BotUI('botui-app');
 
-    botui.message.add({
-        content: 'Ciao! Come posso aiutarti oggi?'
-    }).then(function () {
-        return botui.action.text({
-            action: {
-                placeholder: 'Scrivi il tuo messaggio qui...'
+    const getResponse = () => {
+        botui.message.add({
+            content: 'Ciao! Come posso aiutarti oggi?'
+        }).then(function () {
+            return botui.action.text({
+                action: {
+                    placeholder: 'Scrivi il tuo messaggio qui...'
+                }
+            });
+        }).then(function (res) {
+            // Logica per risposte predefinite
+            var risposta;
+            switch (res.value.toLowerCase()) {
+                case 'ciao':
+                    risposta = 'Ciao! Come posso aiutarti?';
+                    break;
+                case 'problema':
+                    risposta = 'Mi dispiace che tu stia riscontrando un problema. Potresti descriverlo in dettaglio?';
+                    break;
+                case 'grazie':
+                    risposta = 'Prego! Se hai altre domande, chiedi pure.';
+                    break;
+                default:
+                    risposta = 'Mi dispiace, non ho capito. Puoi ripetere?';
             }
-        });
-    }).then(function (res) {
-        // Logica per risposte predefinite
-        var risposta;
-        switch (res.value.toLowerCase()) {
-            case 'ciao':
-                risposta = 'Ciao! Come posso aiutarti?';
-                break;
-            case 'problema':
-                risposta = 'Mi dispiace che tu stia riscontrando un problema. Potresti descriverlo in dettaglio?';
-                break;
-            case 'grazie':
-                risposta = 'Prego! Se hai altre domande, chiedi pure.';
-                break;
-            default:
-                risposta = 'Mi dispiace, non ho capito. Puoi ripetere?';
-        }
 
-        return botui.message.add({
-            content: risposta
-        });
-    });
+            return botui.message.add({
+                content: risposta
+            });
+        }).then(getResponse);
+    };
+
+    getResponse();
 };
-
 // Inizializzazione generale
 document.addEventListener('DOMContentLoaded', () => {
     navManager.init();
