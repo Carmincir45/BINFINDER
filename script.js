@@ -36,6 +36,9 @@ const navManager = (() => {
     const openService = (service) => {
         // Logica per aprire i servizi
         console.log('Apertura servizio:', service);
+          if (service === 'assistenza') {
+            startChat();
+        }
     };
 
     return { init };
@@ -47,6 +50,7 @@ const mapManager = (() => {
     const initMap = () => {
         map = L.map('map').setView([40.8522, 14.2681], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
     };
 
     return {
@@ -56,22 +60,8 @@ const mapManager = (() => {
         }
     };
 })();
-
-// Inizializzazione generale
-document.addEventListener('DOMContentLoaded', () => {
-    navManager.init();
-    mapManager.init();
-
-    // Geolocalizzazione
-    navigator.geolocation.getCurrentPosition(pos => {
-        L.marker([pos.coords.latitude, pos.coords.longitude])
-            .addTo(mapManager.map)
-            .bindPopup('La tua posizione');
-    }, err => {
-        console.error('Errore geolocalizzazione:', err);
-    });
-
-    // Inizializzazione BotUI
+//STart chat with user
+const startChat = () => {
     var botui = new BotUI('botui-app');
 
     botui.message.add({
@@ -102,5 +92,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return botui.message.add({
             content: risposta
         });
+    });
+};
+
+// Inizializzazione generale
+document.addEventListener('DOMContentLoaded', () => {
+    navManager.init();
+    mapManager.init();
+
+    // Geolocalizzazione
+    navigator.geolocation.getCurrentPosition(pos => {
+        L.marker([pos.coords.latitude, pos.coords.longitude])
+            .addTo(mapManager.map)
+            .bindPopup('La tua posizione');
+    }, err => {
+        console.error('Errore geolocalizzazione:', err);
     });
 });
