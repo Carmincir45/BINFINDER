@@ -54,7 +54,7 @@ const mapManager = (() => {
 
     return { // <-- Questo è l'oggetto restituito
         init: initMap,
-        map: () => mapInstance // Esponi tramite funzione
+        getMap: () => mapInstance 
     };
 })();
 const chatManager = (() => {
@@ -161,8 +161,9 @@ const startChat = () => {
 };
 // Inizializzazione generale
 document.addEventListener('DOMContentLoaded', () => {
-    navManager.init();
     mapManager.init();
+    navManager.init();
+    
 
     // Geolocalizzazione
     navigator.geolocation.getCurrentPosition(pos => {
