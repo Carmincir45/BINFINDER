@@ -49,7 +49,7 @@ const mapManager = (() => {
     
     const initMap = () => {
         mapInstance = L.map('map').setView([40.8522, 14.2681], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}/.png').addTo(mapInstance);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapInstance);
     };
 
     return { // <-- Questo è l'oggetto restituito
