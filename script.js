@@ -53,26 +53,21 @@ const mapManager = (() => {
         init: () => {
             initMap();
             // Altri init mappa...
-        },
-         getMap: () => map
+        }
     };
 })();
 
 // Inizializzazione generale
-document.addEventListener('DOMContentLoaded', () =>) {
+document.addEventListener('DOMContentLoaded', () => {
     navManager.init();
     mapManager.init();
 
-     const map = mapManager.getMap(); // Otteniamo la mappa
-       if (map) {
-        navigator.geolocation.getCurrentPosition(pos => {
-            L.marker([pos.coords.latitude, pos.coords.longitude])
-                .addTo(map)
-                .bindPopup('La tua posizione');
-        }, err => {
-            console.error('Errore geolocalizzazione:', err);
-        });
-    } else {
-        console.error('La mappa non è stata inizializzata.');
-       }
-};
+    // Geolocalizzazione
+    navigator.geolocation.getCurrentPosition(pos => {
+        L.marker([pos.coords.latitude, pos.coords.longitude])
+            .addTo(mapManager.map)
+            .bindPopup('La tua posizione');
+    }, err => {
+        console.error('Errore geolocalizzazione:', err);
+    });
+});
